@@ -4,24 +4,35 @@ import (
 	"ftl/kafi-common/common"
 	"ftl/kafi-common/modules/kafka"
 	"ftl/kafi-common/modules/logger"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
 	logger.InitLogger()
+	kafkaUrls := []string{"192.168.4.129:9092"}
 
-	kafkaUrls := []string{"10.40.80.236:9092"}
-
-	consumerConfig := &kafka.KafkaConsumerConfig{
-		ClusterID: "test",
-		Brokers:   kafkaUrls,
+	handleMessage := func(msg *common.Message) error {
+		logger.Info("handleMessage: xxx")
+		return nil
 	}
 
-	Consumer, consumerErr := kafka.NewKafkaConsumer(consumerConfig)
+	// Tạo kênh tín hiệu dừng
+	stopChan := make(chan struct{})
+
+	consumer, consumerErr := kafka.NewKafkaConsumer(&kafka.KafkaConsumerConfig{
+		ClusterID: "test",
+		Brokers:   kafkaUrls,
+		GroupID:   "test1",
+		Topic:     "test2",
+	}, handleMessage, stopChan)
 	if consumerErr != nil {
 		return
 	}
 
-	// Cấu hình Kafka Producer
+	defer consumer.Close()
+
 	producerConfig := &kafka.KafkaProducerConfig{
 		ClusterID: "test",
 		Brokers:   kafkaUrls,
@@ -32,12 +43,18 @@ func main() {
 		return
 	}
 
-	// Bắt đầu tiêu thụ tin nhắn
-	Consumer.ConsumeMessages("test")
-
 	message := common.KafkaResponse{
-		Data: map[string]interface{}{"key1": "value1", "key2": "value2"}, // Hoặc có thể là một struct khác
+		Data: "xxx", // Hoặc có thể là một struct khác
 	}
+	kafka.SendMessage("xxx", "test2", "/update", message, common.REQUEST)
 
-	kafka.SendMessage("xxx", "test", "/update", message, common.REQUEST)
+	// Lắng nghe tín hiệu dừng
+	signalChan := make(chan os.Signal, 1)
+	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
+
+	<-signalChan
+	logger.Info("Received shutdown signal, exiting...")
+
+	// Gửi tín hiệu dừng đến consumer
+	close(stopChan)
 }

@@ -1,9 +1,6 @@
 package errors
 
-import (
-	"ftl/kafi-common/common/interfaces"
-	"ftl/kafi-common/common/errorCodes"
-)
+import "ftl/kafi-common/common"
 
 type SystemError struct {
 	*GeneralError
@@ -11,6 +8,6 @@ type SystemError struct {
 
 func NewSystemError(source string) *SystemError {
 	return &SystemError{
-		GeneralError: NewGeneralError(INTERNAL_SERVER_ERROR, nil, source, nil),
+		GeneralError: NewGeneralError(string(common.INTERNAL_SERVER_ERROR), nil, source, nil),
 	}
 }

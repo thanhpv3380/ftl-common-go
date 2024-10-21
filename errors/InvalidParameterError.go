@@ -1,16 +1,13 @@
 package errors
 
-import (
-	"ftl/kafi-common/common/interfaces"
-	"ftl/kafi-common/common/errorCodes"
-)
+import "ftl/kafi-common/common"
 
 type InvalidParameterError struct {
 	*GeneralError
 }
 
-func NewInvalidParameterError(params map[string][]ParamError, source string, messageParams map[string]interface{}) *InvalidParameterError {
+func NewInvalidParameterError(params map[string][]common.ParamError, source string, messageParams map[string]interface{}) *InvalidParameterError {
 	return &InvalidParameterError{
-		GeneralError: NewGeneralError(INVALID_PARAMETER, params, source, messageParams),
+		GeneralError: NewGeneralError(string(common.INVALID_PARAMETER), params, source, messageParams),
 	}
 }

@@ -1,16 +1,13 @@
 package errors
 
-import (
-	"ftl/kafi-common/common/interfaces"
-	"ftl/kafi-common/common/errorCodes"
-)
+import "ftl/kafi-common/common"
 
 type UnauthorizedError struct {
 	*GeneralError
 }
 
-func NewUnauthorizedError(params map[string][]ParamError, source string, messageParams map[string]interface{}) *UnauthorizedError {
+func NewUnauthorizedError(params map[string][]common.ParamError, source string, messageParams map[string]interface{}) *UnauthorizedError {
 	return &UnauthorizedError{
-		GeneralError: NewGeneralError(UNAUTHORIZED, params, source, messageParams),
+		GeneralError: NewGeneralError(string(common.UNAUTHORIZED), params, source, messageParams),
 	}
 }

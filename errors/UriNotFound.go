@@ -1,8 +1,7 @@
 package errors
 
 import (
-	"ftl/kafi-common/common/interfaces"
-	"ftl/kafi-common/common/errorCodes"
+	"ftl/kafi-common/common"
 )
 
 type UriNotFound struct {
@@ -11,6 +10,6 @@ type UriNotFound struct {
 
 func NewUriNotFound(source string) *UriNotFound {
 	return &UriNotFound{
-		GeneralError: NewGeneralError(URI_NOT_FOUND, nil, source, nil),
+		GeneralError: NewGeneralError(string(common.URI_NOT_FOUND), nil, source, nil),
 	}
 }

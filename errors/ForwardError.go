@@ -1,19 +1,22 @@
 package errors
 
 import (
-	"ftl/kafi-common/common/interfaces"
+	"fmt"
+	"ftl/kafi-common/common"
 )
 
 type ForwardError struct {
-	Status         Status
+	Status         common.Status
 	IsForwardError bool
-	Err            error
 }
 
-func NewForwardError(status Status) *ForwardError {
+func (e *ForwardError) Error() string {
+	return fmt.Sprintf(e.Status.Code)
+}
+
+func NewForwardError(status common.Status) *ForwardError {
 	return &ForwardError{
 		Status:         status,
 		IsForwardError: true,
-		Err:            fmt.Errorf("forward error"),
 	}
 }

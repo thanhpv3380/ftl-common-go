@@ -47,10 +47,10 @@ func SendMessage(
 ) error {
 	kafkaMessage := createMessage(transactionID, topic, uri, data, messageType)
 
-	value, err := json.Marshal(kafkaMessage)
-	if err != nil {
-		logger.Error("Error convert kafka message", err)
-		return err
+	value, convertErr := json.Marshal(kafkaMessage)
+	if convertErr != nil {
+		logger.Error("Error convert kafka message", convertErr)
+		return convertErr
 	}
 
 	msg := &sarama.ProducerMessage{
@@ -59,18 +59,16 @@ func SendMessage(
 		Value: sarama.ByteEncoder(value),
 	}
 
-	partition, offset, err := Producer.producer.SendMessage(msg)
+	logger.Info("Send message to kafka", map[string]interface{}{
+		"topic":   topic,
+		"message": kafkaMessage,
+	})
+
+	_, _, err := Producer.producer.SendMessage(msg)
 	if err != nil {
 		logger.Error("Error send message to kafka", err)
 		return err
 	}
-
-	logger.Info("Send message to kafka success", map[string]interface{}{
-		"topic":     topic,
-		"partition": partition,
-		"offset":    offset,
-		"message":   kafkaMessage,
-	})
 
 	return nil
 }

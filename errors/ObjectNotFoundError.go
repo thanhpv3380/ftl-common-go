@@ -1,8 +1,7 @@
 package errors
 
 import (
-	"ftl/kafi-common/common/interfaces"
-	"ftl/kafi-common/common/errorCodes"
+	"ftl/kafi-common/common"
 )
 
 type ObjectNotFoundError struct {
@@ -11,6 +10,6 @@ type ObjectNotFoundError struct {
 
 func NewObjectNotFoundError(source string) *ObjectNotFoundError {
 	return &ObjectNotFoundError{
-		GeneralError: NewGeneralError(OBJECT_NOT_FOUND, nil, source, nil),
+		GeneralError: NewGeneralError(string(common.OBJECT_NOT_FOUND), nil, source, nil),
 	}
 }
