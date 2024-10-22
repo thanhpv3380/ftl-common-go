@@ -1,4 +1,4 @@
-module ftl/kafi-common
+module github/thanhpv3380/ftl-common-go
 
 go 1.23.2
 
