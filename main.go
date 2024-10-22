@@ -1,9 +1,9 @@
 package main
 
 import (
-	"ftl/kafi-common/common"
-	"ftl/kafi-common/modules/kafka"
-	"ftl/kafi-common/modules/logger"
+	"github/thanhpv3380/ftl-common-go/common"
+	"github/thanhpv3380/ftl-common-go/modules/kafka"
+	"github/thanhpv3380/ftl-common-go/modules/logger"
 	"os"
 	"os/signal"
 	"syscall"

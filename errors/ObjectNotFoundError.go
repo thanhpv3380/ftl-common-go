@@ -1,7 +1,7 @@
 package errors
 
 import (
-	"ftl/kafi-common/common"
+	"github/thanhpv3380/ftl-common-go/common"
 )
 
 type ObjectNotFoundError struct {

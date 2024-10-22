@@ -2,7 +2,7 @@ package errors
 
 import (
 	"fmt"
-	"ftl/kafi-common/common"
+	"github/thanhpv3380/ftl-common-go/common"
 )
 
 type ForwardError struct {

@@ -2,8 +2,8 @@ package kafka
 
 import (
 	"encoding/json"
-	"ftl/kafi-common/common"
-	"ftl/kafi-common/modules/logger"
+	"github/thanhpv3380/ftl-common-go/common"
+	"github/thanhpv3380/ftl-common-go/modules/logger"
 	"strconv"
 
 	"github.com/IBM/sarama"

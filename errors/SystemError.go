@@ -1,6 +1,6 @@
 package errors
 
-import "ftl/kafi-common/common"
+import "github/thanhpv3380/ftl-common-go/common"
 
 type SystemError struct {
 	*GeneralError
