@@ -59,24 +59,16 @@ type KafkaConsumerGroupHandler struct {
 	config        *KafkaConsumerConfig
 }
 
-// Setup được gọi khi consumer group bắt đầu
 func (h *KafkaConsumerGroupHandler) Setup(sarama.ConsumerGroupSession) error {
-	// Thực hiện các thiết lập cần thiết nếu có
-	logger.Info("start")
 	return nil
 }
 
-// Cleanup được gọi khi consumer group kết thúc
 func (h *KafkaConsumerGroupHandler) Cleanup(sarama.ConsumerGroupSession) error {
-	// Dọn dẹp tài nguyên nếu cần
-	logger.Info("end")
 	return nil
 }
 
 func (h *KafkaConsumerGroupHandler) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
-	logger.Info("xxx")
 	for msg := range claim.Messages() {
-		logger.Info("receieve")
 		messageParsed, err := h.parseMessage(msg)
 		if err != nil {
 			continue
@@ -87,14 +79,12 @@ func (h *KafkaConsumerGroupHandler) ConsumeClaim(session sarama.ConsumerGroupSes
 				if err := h.handleMessage(messageParsed); err != nil {
 					logger.Error("Error handling message", err)
 				}
-				logger.Info("1mark")
 				session.MarkMessage(msg, "")
 			}(msg)
 		} else {
 			if err := h.handleMessage(messageParsed); err != nil {
 				logger.Error("Error handling message", err)
 			}
-			logger.Info("mark")
 			session.MarkMessage(msg, "")
 		}
 	}

@@ -9,8 +9,7 @@ import (
 	"syscall"
 )
 
-func main() {
-	logger.InitLogger()
+func run() {
 	kafkaUrls := []string{"192.168.4.129:9092"}
 
 	handleMessage := func(msg *common.Message) error {
@@ -53,8 +52,15 @@ func main() {
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
 
 	<-signalChan
-	logger.Info("Received shutdown signal, exiting...")
 
 	// Gửi tín hiệu dừng đến consumer
 	close(stopChan)
+}
+
+func main() {
+	logger.InitLogger(nil)
+
+	logger.Info("start main", map[string]interface{}{"name": "test"})
+
+	// run()
 }
