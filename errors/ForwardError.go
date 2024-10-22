@@ -2,7 +2,8 @@ package errors
 
 import (
 	"fmt"
-	"github/thanhpv3380/ftl-common-go/common"
+
+	"github.com/thanhpv3380/ftl-common-go/common"
 )
 
 type ForwardError struct {

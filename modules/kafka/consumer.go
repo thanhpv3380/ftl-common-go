@@ -3,8 +3,9 @@ package kafka
 import (
 	"context"
 	"encoding/json"
-	"github/thanhpv3380/ftl-common-go/common"
-	"github/thanhpv3380/ftl-common-go/modules/logger"
+
+	"github.com/thanhpv3380/ftl-common-go/common"
+	"github.com/thanhpv3380/ftl-common-go/modules/logger"
 
 	"github.com/IBM/sarama"
 )

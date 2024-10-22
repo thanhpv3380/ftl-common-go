@@ -1,4 +1,4 @@
-module github/thanhpv3380/ftl-common-go
+module github.com/thanhpv3380/ftl-common-go
 
 go 1.23.2
 

@@ -1,6 +1,6 @@
 package errors
 
-import "github/thanhpv3380/ftl-common-go/common"
+import "github.com/thanhpv3380/ftl-common-go/common"
 
 type UnauthorizedError struct {
 	*GeneralError

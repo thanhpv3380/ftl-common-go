@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github/thanhpv3380/ftl-common-go/common"
-	"github/thanhpv3380/ftl-common-go/modules/kafka"
-	"github/thanhpv3380/ftl-common-go/modules/logger"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/thanhpv3380/ftl-common-go/common"
+	"github.com/thanhpv3380/ftl-common-go/modules/kafka"
+	"github.com/thanhpv3380/ftl-common-go/modules/logger"
 )
 
 func main() {
