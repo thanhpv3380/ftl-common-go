@@ -23,7 +23,7 @@ type LoggerConfig struct {
 
 func DefaultLoggerConfig() *LoggerConfig {
 	return &LoggerConfig{
-		LogFile:          "app.log",
+		LogFile:          "logs/app.log",
 		LogLevel:         logrus.InfoLevel,
 		DisableColors:    false,
 		FullTimestamp:    true,

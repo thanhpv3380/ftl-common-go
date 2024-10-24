@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"ftl/kafi-common/common"
 	"ftl/kafi-common/modules/kafka"
 	"ftl/kafi-common/modules/logger"
@@ -9,7 +10,47 @@ import (
 	"syscall"
 )
 
-func run() {
+// func startKafkaConsumer(ctx context.Context, wg *sync.WaitGroup) {
+// 	wg.Add(1)
+
+// 	go func() {
+// 		defer wg.Done()
+
+// 		kafkaUrls := []string{"192.168.4.129:9092"}
+
+// 		handleMessage := func(msg *common.Message) error {
+// 			logger.Info("handleMessage: xxx")
+// 			return nil
+// 		}
+
+// 		consumerGroup, err := kafka.NewKafkaConsumer(&kafka.KafkaConsumerConfig{
+// 			ClusterID: "test",
+// 			Brokers:   kafkaUrls,
+// 			GroupID:   "test1",
+// 			Topic:     "test",
+// 		}, handleMessage)
+
+// 		if err != nil {
+// 			return
+// 		}
+
+// 		defer func() {
+// 			if err := consumerGroup.Close(); err != nil {
+// 				log.Println("Lỗi khi dừng Kafka consumer:", err)
+// 			}
+// 		}()
+
+// 		<-ctx.Done()
+// 		log.Println("Dừng Kafka consumer...")
+// 	}()
+// }
+
+func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel() // Đảm bảo hủy context khi main kết thúc
+
+	logger.InitLogger(nil)
+
 	kafkaUrls := []string{"192.168.4.129:9092"}
 
 	handleMessage := func(msg *common.Message) error {
@@ -17,50 +58,24 @@ func run() {
 		return nil
 	}
 
-	// Tạo kênh tín hiệu dừng
-	stopChan := make(chan struct{})
-
-	consumer, consumerErr := kafka.NewKafkaConsumer(&kafka.KafkaConsumerConfig{
+	_, err := kafka.NewKafkaConsumer(ctx, &kafka.KafkaConsumerConfig{
 		ClusterID: "test",
 		Brokers:   kafkaUrls,
 		GroupID:   "test1",
-		Topic:     "test2",
-	}, handleMessage, stopChan)
-	if consumerErr != nil {
+		Topic:     "test",
+	}, handleMessage)
+
+	if err != nil {
 		return
 	}
-
-	defer consumer.Close()
-
-	producerConfig := &kafka.KafkaProducerConfig{
-		ClusterID: "test",
-		Brokers:   kafkaUrls,
-	}
-
-	_, producerErr := kafka.NewKafkaProducer(producerConfig)
-	if producerErr != nil {
-		return
-	}
-
-	message := common.KafkaResponse{
-		Data: "xxx", // Hoặc có thể là một struct khác
-	}
-	kafka.SendMessage("xxx", "test2", "/update", message, common.REQUEST)
-
-	// Lắng nghe tín hiệu dừng
-	signalChan := make(chan os.Signal, 1)
-	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
-
-	<-signalChan
-
-	// Gửi tín hiệu dừng đến consumer
-	close(stopChan)
+	waitForShutdown(cancel)
+	<-ctx.Done()
+	logger.Info("Main: Context canceled, exiting...")
 }
 
-func main() {
-	logger.InitLogger(nil)
-
-	logger.Info("start main", map[string]interface{}{"name": "test"})
-
-	// run()
+func waitForShutdown(cancel context.CancelFunc) {
+	sigterm := make(chan os.Signal, 1)
+	signal.Notify(sigterm, syscall.SIGINT, syscall.SIGTERM)
+	<-sigterm
+	cancel()
 }

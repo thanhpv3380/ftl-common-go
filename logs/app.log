@@ -1,0 +1,68 @@
+[36mINFO   [0m[2024-10-24 23:02:43.760] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:02:43.818] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[31mERROR  [0m[2024-10-24 23:03:39.891] Error parse kafka message: invalid character 's' looking for beginning of value 
+[36mINFO   [0m[2024-10-24 23:05:24.625] Received message from Kafka                   [36mdata[0m={<nil> <nil>} [36moffset[0m=18 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m="" [36muri[0m=""
+[36mINFO   [0m[2024-10-24 23:05:24.628] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:07:31.417] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:07:37.184] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:07:37.242] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-24 23:08:04.273] Received message from Kafka                   [36mdata[0m={<nil> <nil>} [36moffset[0m=19 [36mpartition[0m=0 [36msourceID[0m=notification [36mtopic[0m=test [36mtransactionID[0m=46d0c019-e6fb-4606-bf36-8e566dd2221d [36muri[0m=/api/v1/internal/user/getByAccountNumber
+[36mINFO   [0m[2024-10-24 23:08:04.274] handleMessage: xxx                           
+[36mINFO   [0m[2024-10-24 23:17:13.166] Received message from Kafka                   [36mdata[0m={<nil> <nil>} [36moffset[0m=20 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-24 23:17:13.169] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:25:15.913] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:25:20.623] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:25:20.681] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-24 23:25:35.039] Received message from Kafka                   [36mdata[0m=map[c:92.06 ch:-0.06 m:UPCOM n1:UPCOM n2:UPCOM r:-0.07 re:92.12 s:UPCOM t:INDEX ti:1.729756903231e+12 va:4.38434827e+11 vo:3.1135566e+07] [36moffset[0m=21 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-24 23:25:35.040] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:34:35.781] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:34:40.844] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:34:40.901] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-24 23:34:53.223] Received message from Kafka                   [36mdata[0m=[123 10 32 32 34 99 34 58 32 57 50 46 48 54 44 10 32 32 34 99 104 34 58 32 45 48 46 48 54 44 10 32 32 34 109 34 58 32 34 85 80 67 79 77 34 44 10 32 32 34 110 49 34 58 32 34 85 80 67 79 77 34 44 10 32 32 34 110 50 34 58 32 34 85 80 67 79 77 34 44 10 32 32 34 114 34 58 32 45 48 46 48 55 44 10 32 32 34 114 101 34 58 32 57 50 46 49 50 44 10 32 32 34 115 34 58 32 34 85 80 67 79 77 34 44 10 32 32 34 116 34 58 32 34 73 78 68 69 88 34 44 10 32 32 34 116 105 34 58 32 49 55 50 57 55 53 54 57 48 51 50 51 49 44 10 32 32 34 118 97 34 58 32 52 51 56 52 51 52 56 50 55 48 48 48 44 10 32 32 34 118 111 34 58 32 51 49 49 51 53 53 54 54 10 125] [36moffset[0m=22 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-24 23:34:53.226] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:35:01.214] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:35:05.690] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:35:05.748] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-24 23:35:18.072] Received message from Kafka                   [36mdata[0m={
+  "c": 92.06,
+  "ch": -0.06,
+  "m": "UPCOM",
+  "n1": "UPCOM",
+  "n2": "UPCOM",
+  "r": -0.07,
+  "re": 92.12,
+  "s": "UPCOM",
+  "t": "INDEX",
+  "ti": 1729756903231,
+  "va": 438434827000,
+  "vo": 31135566
+} [36moffset[0m=23 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-24 23:35:18.075] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:35:45.250] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:35:49.743] start main                                    [36mname[0m=test
+[36mINFO   [0m[2024-10-24 23:35:49.803] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-24 23:36:01.233] Received message from Kafka                   [36mdata[0m={"c":92.06,"ch":-0.06,"m":"UPCOM","n1":"UPCOM","n2":"UPCOM","r":-0.07,"re":92.12,"s":"UPCOM","t":"INDEX","ti":1729756903231,"va":438434827000,"vo":31135566} [36moffset[0m=24 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-24 23:36:01.233] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-24 23:44:22.777] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:45:08.831] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[31mERROR  [0m[2024-10-24 23:45:08.833] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-24 23:46:05.518] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:02:54.417] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:03:02.574] Received message from Kafka                   [36mdata[0m={"c":92.06,"ch":-0.06,"m":"UPCOM","n1":"UPCOM","n2":"UPCOM","r":-0.07,"re":92.12,"s":"UPCOM","t":"INDEX","ti":1729756903231,"va":438434827000,"vo":31135566} [36moffset[0m=25 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-25 00:03:02.575] handleMessage: xxx                           
+[31mERROR  [0m[2024-10-25 00:04:10.020] Error from consumer: kafka: tried to use a consumer group that was closed 
+[36mINFO   [0m[2024-10-25 00:19:34.695] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:20:45.166] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:20:56.398] Received message from Kafka                   [36mdata[0m={"c":92.06,"ch":-0.06,"m":"UPCOM","n1":"UPCOM","n2":"UPCOM","r":-0.07,"re":92.12,"s":"UPCOM","t":"INDEX","ti":1729756903231,"va":438434827000,"vo":31135566} [36moffset[0m=26 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-25 00:20:56.402] handleMessage: xxx                           
+[36mINFO   [0m[2024-10-25 00:42:04.463] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:45:41.231] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 00:46:07.051] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 01:07:54.882] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[31mERROR  [0m[2024-10-25 01:07:54.938] Error from consumer: context canceled        
+[36mINFO   [0m[2024-10-25 01:07:54.938] Main: Context canceled, exiting...           
+[36mINFO   [0m[2024-10-25 01:08:05.157] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 01:08:14.117] Received message from Kafka                   [36mdata[0m={"c":92.06,"ch":-0.06,"m":"UPCOM","n1":"UPCOM","n2":"UPCOM","r":-0.07,"re":92.12,"s":"UPCOM","t":"INDEX","ti":1729756903231,"va":438434827000,"vo":31135566} [36moffset[0m=27 [36mpartition[0m=0 [36msourceID[0m="" [36mtopic[0m=test [36mtransactionID[0m=fa1bc81e-292a-4479-b293-f3c7e1bdcbc2 [36muri[0m=Update
+[36mINFO   [0m[2024-10-25 01:08:14.119] handleMessage: xxx                           
+[36mINFO   [0m[2024-10-25 01:09:50.144] Consumer created successfully                 [36mclusterId[0m=test [36mgroupId[0m=test1 [36mtopic[0m=test
+[36mINFO   [0m[2024-10-25 01:09:52.380] Main: Context canceled, exiting...           
