@@ -11,6 +11,7 @@ type Status struct {
 	Code          string                  `json:"code"`
 	MessageParams map[string]interface{}  `json:"messageParams,omitempty"`
 	Params        map[string][]ParamError `json:"params,omitempty"`
+	Message       string                  `json:"message"`
 }
 
 type KafkaConfigOptions struct {
@@ -33,7 +34,7 @@ type Message struct {
 	TransactionID       string               `json:"transactionId"`
 	URI                 string               `json:"uri"`
 	ResponseDestination *ResponseDestination `json:"responseDestination,omitempty"`
-	Data                KafkaResponse        `json:"data"`
+	Data                interface{}          `json:"data"`
 }
 
 type MessageType string
@@ -50,6 +51,5 @@ type ResponseDestination struct {
 }
 
 type KafkaResponse struct {
-	Status *Status     `json:"status,omitempty"`
-	Data   interface{} `json:"data,omitempty"`
+	Status *Status `json:"status,omitempty"`
 }
