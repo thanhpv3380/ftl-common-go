@@ -2,7 +2,6 @@ package kafka
 
 import (
 	"encoding/json"
-	"strconv"
 
 	"github.com/thanhpv3380/ftl-common-go/common"
 	"github.com/thanhpv3380/ftl-common-go/modules/logger"
@@ -43,15 +42,15 @@ func SendMessage(
 	transactionID string,
 	topic string,
 	uri string,
-	data common.KafkaResponse,
+	data interface{},
 	messageType common.MessageType,
-) error {
+) (int, error) {
 	kafkaMessage := createMessage(transactionID, topic, uri, data, messageType)
 
 	value, convertErr := json.Marshal(kafkaMessage)
 	if convertErr != nil {
 		logger.Error("Error convert kafka message", convertErr)
-		return convertErr
+		return 0, convertErr
 	}
 
 	msg := &sarama.ProducerMessage{
@@ -68,17 +67,17 @@ func SendMessage(
 	_, _, err := Producer.producer.SendMessage(msg)
 	if err != nil {
 		logger.Error("Error send message to kafka", err)
-		return err
+		return 0, err
 	}
 
-	return nil
+	return kafkaMessage.Message.MessageID, nil
 }
 
 func createMessage(
 	transactionID string,
 	topic string,
 	uri string,
-	data common.KafkaResponse,
+	data interface{},
 	messageType common.MessageType,
 ) common.KafkaMessage {
 	messageId += 1
@@ -88,7 +87,7 @@ func createMessage(
 		Message: common.Message{
 			MessageType:   messageType,
 			SourceID:      Producer.config.ClusterID,
-			MessageID:     strconv.Itoa(messageId),
+			MessageID:     messageId,
 			TransactionID: transactionID,
 			URI:           uri,
 			Data:          data,

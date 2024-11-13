@@ -7,11 +7,11 @@ import (
 )
 
 type GeneralError struct {
-	Code          string
-	MessageParams map[string]interface{}
-	Source        string
-	Params        map[string][]common.ParamError
-	IsSystemError bool
+	Code          string                         `json:"code"`
+	MessageParams map[string]interface{}         `json:"messageParams"`
+	Source        string                         `json:"source"`
+	Params        map[string][]common.ParamError `json:"params"`
+	IsSystemError bool                           `json:"isSystemError"`
 }
 
 func (e *GeneralError) Error() string {

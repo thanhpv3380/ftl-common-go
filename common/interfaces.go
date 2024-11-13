@@ -30,7 +30,7 @@ type KafkaMessage struct {
 type Message struct {
 	MessageType         MessageType          `json:"messageType"`
 	SourceID            string               `json:"sourceId"`
-	MessageID           string               `json:"messageId"`
+	MessageID           int                  `json:"messageId"`
 	TransactionID       string               `json:"transactionId"`
 	URI                 string               `json:"uri"`
 	ResponseDestination *ResponseDestination `json:"responseDestination,omitempty"`

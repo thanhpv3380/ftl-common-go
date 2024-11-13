@@ -7,6 +7,8 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 )
 
+replace github.com/thanhpv3380/ftl-common-go => ../ftl-common-go
+
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.7.0 // indirect
