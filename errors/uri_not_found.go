@@ -5,7 +5,7 @@ import (
 )
 
 type UriNotFound struct {
-	*GeneralError
+	*common.GeneralError
 }
 
 func NewUriNotFound(source string) *UriNotFound {

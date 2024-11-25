@@ -2,6 +2,8 @@ package kafka
 
 import (
 	"encoding/json"
+	"fmt"
+	"strconv"
 
 	"github.com/thanhpv3380/ftl-common-go/common"
 	"github.com/thanhpv3380/ftl-common-go/modules/logger"
@@ -15,6 +17,8 @@ var Producer *KafkaProducer
 type KafkaProducerConfig struct {
 	ClusterID string
 	Brokers   []string
+	NodeID    string
+	Timeout   int
 }
 
 type KafkaProducer struct {
@@ -39,58 +43,81 @@ func NewKafkaProducer(config *KafkaProducerConfig) (*KafkaProducer, error) {
 }
 
 func SendMessage(
-	transactionID string,
 	topic string,
-	uri string,
-	data interface{},
-	messageType common.MessageType,
-) (int, error) {
-	kafkaMessage := createMessage(transactionID, topic, uri, data, messageType)
-
-	value, convertErr := json.Marshal(kafkaMessage)
+	message common.Message,
+) (string, error) {
+	value, convertErr := json.Marshal(message)
 	if convertErr != nil {
 		logger.Error("Error convert kafka message", convertErr)
-		return 0, convertErr
+		return message.MessageID, convertErr
 	}
 
 	msg := &sarama.ProducerMessage{
-		Topic: kafkaMessage.Topic,
-		Key:   sarama.StringEncoder(kafkaMessage.Message.MessageID),
+		Topic: topic,
+		Key:   sarama.StringEncoder(message.MessageID),
 		Value: sarama.ByteEncoder(value),
 	}
 
 	logger.Info("Send message to kafka", map[string]interface{}{
 		"topic":   topic,
-		"message": kafkaMessage,
+		"message": message,
 	})
 
 	_, _, err := Producer.producer.SendMessage(msg)
 	if err != nil {
 		logger.Error("Error send message to kafka", err)
-		return 0, err
+		return message.MessageID, err
 	}
 
-	return kafkaMessage.Message.MessageID, nil
+	return message.MessageID, nil
 }
 
-func createMessage(
+func createMessageRequest(
 	transactionID string,
-	topic string,
 	uri string,
 	data interface{},
-	messageType common.MessageType,
-) common.KafkaMessage {
+) common.Message {
 	messageId += 1
 
-	return common.KafkaMessage{
-		Topic: topic,
-		Message: common.Message{
-			MessageType:   messageType,
-			SourceID:      Producer.config.ClusterID,
-			MessageID:     messageId,
-			TransactionID: transactionID,
-			URI:           uri,
-			Data:          data,
+	return common.Message{
+		MessageType:   common.REQUEST,
+		SourceID:      Producer.config.ClusterID,
+		MessageID:     strconv.Itoa(messageId),
+		TransactionID: transactionID,
+		URI:           uri,
+		Data:          data,
+		ResponseDestination: &common.ResponseDestination{
+			Topic: fmt.Sprintf("%s.response.%s", Producer.config.ClusterID, Producer.config.NodeID),
+			URI:   string(common.REQUEST_RESPONSE),
 		},
+	}
+}
+
+func createMessageResponse(
+	transactionID string,
+	uri string,
+	data interface{},
+	messageId string,
+) common.Message {
+	var result interface{}
+
+	switch v := data.(type) {
+	case *common.GeneralError:
+		result = map[string]interface{}{
+			"status": v,
+		}
+	default:
+		result = map[string]interface{}{
+			"data": data,
+		}
+	}
+
+	return common.Message{
+		MessageType:   common.RESPONSE,
+		SourceID:      Producer.config.ClusterID,
+		MessageID:     messageId,
+		TransactionID: transactionID,
+		URI:           uri,
+		Data:          result,
 	}
 }

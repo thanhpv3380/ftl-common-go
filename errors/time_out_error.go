@@ -3,7 +3,7 @@ package errors
 import "github.com/thanhpv3380/ftl-common-go/common"
 
 type TimeoutError struct {
-	*GeneralError
+	*common.GeneralError
 }
 
 func NewTimeoutError(params map[string][]common.ParamError, source string, messageParams map[string]interface{}) *TimeoutError {

@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 
 	"github.com/sirupsen/logrus"
-
 	"github.com/thanhpv3380/ftl-common-go/utils"
 )
 
@@ -76,6 +75,10 @@ func Info(message string, fields ...logrus.Fields) {
 	} else {
 		Logger.WithFields(fields[0]).Info(message)
 	}
+}
+
+func Infof(format string, args ...interface{}) {
+	Logger.Infof(format, args...)
 }
 
 func Warn(message string, fields ...logrus.Fields) {
